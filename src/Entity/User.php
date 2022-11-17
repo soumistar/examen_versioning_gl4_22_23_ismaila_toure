@@ -34,12 +34,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 50, nullable: true)]
     private ?string $lastname = null;
 
-    #[ORM\Column]
-    private ?\DateTimeImmutable $created_at = null;
-
-    #[ORM\Column(nullable: true)]
-    private ?\DateTimeImmutable $last_login = null;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -133,28 +127,4 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-
-    public function getCreatedAt(): ?\DateTimeImmutable
-    {
-        return $this->created_at;
     }
-
-    public function setCreatedAt(\DateTimeImmutable $created_at): self
-    {
-        $this->created_at = $created_at;
-
-        return $this;
-    }
-
-    public function getLastLogin(): ?\DateTimeImmutable
-    {
-        return $this->last_login;
-    }
-
-    public function setLastLogin(?\DateTimeImmutable $last_login): self
-    {
-        $this->last_login = $last_login;
-
-        return $this;
-    }
-}
