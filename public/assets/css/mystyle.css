@@ -1,0 +1,12 @@
+.nav-link-costum, .nav-link-costum a {
+    color: white;
+}
+
+.footer-costum {
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
