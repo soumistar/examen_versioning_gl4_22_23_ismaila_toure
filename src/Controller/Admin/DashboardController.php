@@ -2,6 +2,9 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Category;
+use App\Entity\Photo;
+use App\Entity\Product;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -41,5 +44,9 @@ class DashboardController extends AbstractDashboardController
             MenuItem::linkToCrud('Create user', 'fas fa-plus', User::class)->setAction(Crud::PAGE_NEW),
             MenuItem::linkToCrud('Users', 'fas fa-eye', User::class)
         ]);
+
+        yield MenuItem::linkToCrud('Categories', 'fas fa-list', Category::class);
+        yield MenuItem::linkToCrud('Products', 'fas fa-list', Product::class);
+        yield MenuItem::linkToCrud('Photos', 'fas fa-list', Photo::class);
     }
 }
