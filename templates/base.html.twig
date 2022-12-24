@@ -144,17 +144,17 @@
                     {% block navBar_element %}
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto py-0">
-                            <a href="{{path('app_home')}}" class="nav-item nav-link active">Home</a>
-                            <a href="{{path('app_shop')}}" class="nav-item nav-link">Shop</a>
-                            <a href="{{path('app_details')}}" class="nav-item nav-link">Shop Detail</a>
+                            <a href="{{path('app_home')}}" class="nav-item nav-link {% if app.request.get('_route') == 'app_home' %}active{% endif %}">Home</a>
+                            <a href="{{path('app_shop')}}" class="nav-item nav-link {% if app.request.get('_route') == 'app_shop' %}active{% endif %}">Shop</a>
+                            <a href="{{path('app_details')}}" class="nav-item nav-link {% if app.request.get('_route') == 'app_details' %}active{% endif %}">Shop Detail</a>
                             <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages <i class="fa fa-angle-down mt-1"></i></a>
+                                <a href="#" class="nav-link dropdown-toggle {% if app.request.get('_route') in ['app_cart', 'app_checkout'] %}active{% endif %}" data-toggle="dropdown">Pages <i class="fa fa-angle-down mt-1"></i></a>
                                 <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
-                                    <a href="{{path('app_cart')}}" class="dropdown-item">Shopping Cart</a>
-                                    <a href="{{path('app_checkout')}}" class="dropdown-item">Checkout</a>
+                                    <a href="{{path('app_cart')}}" class="dropdown-item {% if app.request.get('_route') == 'app_cart' %}active{% endif %}">Shopping Cart</a>
+                                    <a href="{{path('app_checkout')}}" class="dropdown-item {% if app.request.get('_route') == 'app_checkout' %}active{% endif %}">Checkout</a>
                                 </div>
                             </div>
-                            <a href="{{path('app_contact')}}" class="nav-item nav-link">Contact</a>
+                            <a href="{{path('app_contact')}}" class="nav-item nav-link {% if app.request.get('_route') == 'app_contact' %}active{% endif %}">Contact</a>
                         </div>
                         <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
                             <a href="" class="btn px-0">
