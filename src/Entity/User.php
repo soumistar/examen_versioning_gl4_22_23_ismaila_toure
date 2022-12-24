@@ -34,6 +34,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 50, nullable: true)]
     private ?string $lastname = null;
 
+    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?Customer $customer = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $created_at = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -127,4 +133,38 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function getCustomer(): ?Customer
+    {
+        return $this->customer;
     }
+
+    public function setCustomer(Customer $customer): self
+    {
+        // set the owning side of the relation if necessary
+        if ($customer->getUser() !== $this) {
+            $customer->setUser($this);
+        }
+
+        $this->customer = $customer;
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->getId() . ': ' . $this->getFirstname() . ' ' . $this->getLastname();
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->created_at;
+    }
+
+    public function setCreatedAt(?\DateTimeImmutable $created_at): self
+    {
+        $this->created_at = $created_at;
+
+        return $this;
+    }
+}
