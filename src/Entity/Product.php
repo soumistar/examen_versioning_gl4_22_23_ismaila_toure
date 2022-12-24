@@ -40,6 +40,9 @@ class Product
     #[ORM\OneToMany(mappedBy: 'product', targetEntity: Photo::class)]
     private Collection $photos;
 
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $details = null;
+
     public function __construct()
     {
         $this->photos = new ArrayCollection();
@@ -167,5 +170,17 @@ class Product
     public function __toString()
     {
         return $this->name;
+    }
+
+    public function getDetails(): ?string
+    {
+        return $this->details;
+    }
+
+    public function setDetails(?string $details): self
+    {
+        $this->details = $details;
+
+        return $this;
     }
 }
