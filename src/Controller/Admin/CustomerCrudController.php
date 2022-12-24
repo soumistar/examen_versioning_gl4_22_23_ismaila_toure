@@ -18,7 +18,7 @@ class CustomerCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id'),
+            IdField::new('id')->hideWhenCreating(),
             AssociationField::new('user'),
             TextField::new('address'),
             TextField::new('city'),

@@ -153,7 +153,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function __toString()
     {
-        return $this->getId() . ' ' . $this->getEmail();
+        return $this->getId() . ': ' . $this->getFirstname() . ' ' . $this->getLastname();
     }
 
     public function getCreatedAt(): ?\DateTimeImmutable

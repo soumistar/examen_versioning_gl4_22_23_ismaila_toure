@@ -5,6 +5,10 @@ namespace App\Controller\Admin;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 class UserCrudController extends AbstractCrudController
 {
@@ -13,16 +17,17 @@ class UserCrudController extends AbstractCrudController
         return User::class;
     }
 
-    /*
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
+            IdField::new('id')->hideWhenCreating(),
+            TextField::new('email'),
+            TextField::new('password')->setFormType(PasswordType::class),
+            TextField::new('firstname'),
+            TextField::new('lastname'),
+            DateTimeField::new('created_at'),
         ];
     }
-    */
 
     public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
