@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Product;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\QueryBuilder;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -45,6 +46,9 @@ class ProductCrudController extends AbstractCrudController
             SlugField::new('slug')->setTargetFieldName('name'),  
             MoneyField::new('price')->setCurrency('XOF'),
             AssociationField::new('category'), 
+            // AssociationField::new('category')->setQueryBuilder(function (QueryBuilder $queryBuilder){
+            //     $queryBuilder->where('entity.active = true');
+            // }), 
             TextareaField::new('description'),
             TextEditorField::new('details'),
             DateTimeField::new('created_at')->hideWhenCreating(),
