@@ -137,6 +137,22 @@ class Category
         return $this;
     }
 
+    public function removeAllProducts(): self
+    {
+        foreach($this->products as $product) {
+            $this->removeProduct($product);
+        }
+        return $this;
+    }
+
+    public function removeAllSubCategories(): self
+    {
+        foreach($this->subcategories as $category) {
+            $this->removeSubcategory($category);
+        }
+        return $this;
+    }
+
     public function __toString()
     {
         return $this->getName();
