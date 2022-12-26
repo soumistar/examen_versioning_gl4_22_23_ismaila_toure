@@ -18,10 +18,18 @@ use Symfony\Component\Routing\Annotation\Route;
 class DashboardController extends AbstractDashboardController
 {
 
-    /* public function __construct(private AdminUrlGenerator $adminUrlGenerator) 
+    /* 
+    public function __construct(private AdminUrlGenerator $adminUrlGenerator) 
     {
 
-    } */
+    } 
+    #[Route('/admin', name: 'admin')]
+    public function index(): Response
+    {
+        $url = $this->adminUrlGenerator->setController(UserCrudController::class)->generateUrl();
+        return $this->redirect($url);
+    }
+    /*/
 
     #[Route('/admin', name: 'admin')]
     public function index(): Response
@@ -29,6 +37,7 @@ class DashboardController extends AbstractDashboardController
         $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
         return $this->redirect($adminUrlGenerator->setController(UserCrudController::class)->generateUrl());
     }
+    //*/
 
     public function configureDashboard(): Dashboard
     {
