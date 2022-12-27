@@ -19,7 +19,7 @@ class AdminSubscriber implements EventSubscriberInterface
     {
         $entityInstance = $event->getEntityInstance();
 
-        if (!($entityInstance instanceof Product) && !($entityInstance instanceof Category)) return;
+        //if (!($entityInstance instanceof Product) && !($entityInstance instanceof Category)) return;
         if(!$entityInstance->getCreatedAt()) $entityInstance->setCreatedAt(new \DateTimeImmutable);
     }
 }
