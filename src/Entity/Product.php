@@ -49,10 +49,14 @@ class Product
     #[ORM\OneToMany(mappedBy: 'product', targetEntity: Like::class)]
     private Collection $likes;
 
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: Review::class)]
+    private Collection $reviews;
+
     public function __construct()
     {
         $this->photos = new ArrayCollection();
         $this->likes = new ArrayCollection();
+        $this->reviews = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -227,6 +231,36 @@ class Product
             // set the owning side to null (unless already changed)
             if ($like->getProduct() === $this) {
                 $like->setProduct(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Review>
+     */
+    public function getReviews(): Collection
+    {
+        return $this->reviews;
+    }
+
+    public function addReview(Review $review): self
+    {
+        if (!$this->reviews->contains($review)) {
+            $this->reviews->add($review);
+            $review->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReview(Review $review): self
+    {
+        if ($this->reviews->removeElement($review)) {
+            // set the owning side to null (unless already changed)
+            if ($review->getProduct() === $this) {
+                $review->setProduct(null);
             }
         }
 

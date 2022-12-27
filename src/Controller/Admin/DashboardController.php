@@ -7,6 +7,7 @@ use App\Entity\Customer;
 use App\Entity\Like;
 use App\Entity\Photo;
 use App\Entity\Product;
+use App\Entity\Review;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -62,5 +63,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Products', 'fas fa-list', Product::class);
         yield MenuItem::linkToCrud('Photos', 'fas fa-list', Photo::class);
         yield MenuItem::linkToCrud('Likes', 'fas fa-list', Like::class);
+        yield MenuItem::linkToCrud('Reviews', 'fas fa-list', Review::class);
     }
 }
