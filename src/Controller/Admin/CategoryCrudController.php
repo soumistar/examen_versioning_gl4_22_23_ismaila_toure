@@ -25,10 +25,10 @@ class CategoryCrudController extends AbstractCrudController
         ];
     }
 
-    public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    public function deleteEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
-        if(!$entityInstance instanceof Category) return;
-        if(!$entityInstance->getCreatedAt()) $entityInstance->setCreatedAt(new \DateTimeImmutable);
-        parent::persistEntity($entityManager, $entityInstance);
+        $entityInstance->removeAllProducts();
+        $entityInstance->removeAllSubCategories();
+        parent::deleteEntity($entityManager, $entityInstance);
     }
 }
