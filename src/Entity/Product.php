@@ -43,6 +43,9 @@ class Product
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $details = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $active = null;
+
     public function __construct()
     {
         $this->photos = new ArrayCollection();
@@ -180,6 +183,18 @@ class Product
     public function setDetails(?string $details): self
     {
         $this->details = $details;
+
+        return $this;
+    }
+
+    public function isActive(): ?bool
+    {
+        return $this->active;
+    }
+
+    public function setActive(?bool $active): self
+    {
+        $this->active = $active;
 
         return $this;
     }
