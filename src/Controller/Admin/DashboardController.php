@@ -2,6 +2,8 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Arrival;
+use App\Entity\ArrivalDetails;
 use App\Entity\Category;
 use App\Entity\Customer;
 use App\Entity\Like;
@@ -64,5 +66,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Photos', 'fas fa-list', Photo::class);
         yield MenuItem::linkToCrud('Likes', 'fas fa-list', Like::class);
         yield MenuItem::linkToCrud('Reviews', 'fas fa-list', Review::class);
+        yield MenuItem::linkToCrud('Arrivals', 'fas fa-list', Arrival::class);
+        yield MenuItem::linkToCrud('Arrivals details', 'fas fa-list', ArrivalDetails::class);
     }
 }

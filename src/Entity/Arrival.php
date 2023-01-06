@@ -32,6 +32,11 @@ class Arrival
         $this->arrivalDetails = new ArrayCollection();
     }
 
+    function __toString()
+    {
+        return $this->id . ' du ' . $this->created_at->format('d/m/Y');
+    }
+
     public function getId(): ?int
     {
         return $this->id;
