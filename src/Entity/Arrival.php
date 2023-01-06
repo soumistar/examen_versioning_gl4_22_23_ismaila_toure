@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ArrivalRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ArrivalRepository::class)]
@@ -21,6 +23,14 @@ class Arrival
 
     #[ORM\Column(nullable: true)]
     private ?bool $closed = null;
+
+    #[ORM\OneToMany(mappedBy: 'arrival', targetEntity: ArrivalDetails::class, orphanRemoval: true)]
+    private Collection $arrivalDetails;
+
+    public function __construct()
+    {
+        $this->arrivalDetails = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -59,6 +69,36 @@ class Arrival
     public function setClosed(?bool $closed): self
     {
         $this->closed = $closed;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ArrivalDetails>
+     */
+    public function getArrivalDetails(): Collection
+    {
+        return $this->arrivalDetails;
+    }
+
+    public function addArrivalDetail(ArrivalDetails $arrivalDetail): self
+    {
+        if (!$this->arrivalDetails->contains($arrivalDetail)) {
+            $this->arrivalDetails->add($arrivalDetail);
+            $arrivalDetail->setArrival($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArrivalDetail(ArrivalDetails $arrivalDetail): self
+    {
+        if ($this->arrivalDetails->removeElement($arrivalDetail)) {
+            // set the owning side to null (unless already changed)
+            if ($arrivalDetail->getArrival() === $this) {
+                $arrivalDetail->setArrival(null);
+            }
+        }
 
         return $this;
     }
