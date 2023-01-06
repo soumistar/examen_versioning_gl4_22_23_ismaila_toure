@@ -40,6 +40,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $created_at = null;
 
+    #[ORM\Column(length: 50, nullable: true)]
+    private ?string $avatar = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $active = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $login_at = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -164,6 +173,42 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCreatedAt(?\DateTimeImmutable $created_at): self
     {
         $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    public function getAvatar(): ?string
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar(?string $avatar): self
+    {
+        $this->avatar = $avatar;
+
+        return $this;
+    }
+
+    public function isActive(): ?bool
+    {
+        return $this->active;
+    }
+
+    public function setActive(?bool $active): self
+    {
+        $this->active = $active;
+
+        return $this;
+    }
+
+    public function getLoginAt(): ?\DateTimeImmutable
+    {
+        return $this->login_at;
+    }
+
+    public function setLoginAt(?\DateTimeImmutable $login_at): self
+    {
+        $this->login_at = $login_at;
 
         return $this;
     }

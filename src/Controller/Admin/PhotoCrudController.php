@@ -26,6 +26,7 @@ class PhotoCrudController extends AbstractCrudController
             ImageField::new('file')
                 ->setBasePath('upload/images/products')
                 ->setUploadDir('public/upload/images/products')
+                ->setUploadedFileNamePattern('[randomhash].[extension]')
                 ->setSortable(false),
             AssociationField::new('product'),
             DateTimeField::new('created_at')->hideWhenCreating()

@@ -30,6 +30,12 @@ class Category
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Product::class)]
     private Collection $products;
 
+    #[ORM\Column(length: 40, nullable: true)]
+    private ?string $slug = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $active = null;
+
     public function __construct()
     {
         $this->subcategories = new ArrayCollection();
@@ -156,5 +162,29 @@ class Category
     public function __toString()
     {
         return $this->getName();
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function isActive(): ?bool
+    {
+        return $this->active;
+    }
+
+    public function setActive(?bool $active): self
+    {
+        $this->active = $active;
+
+        return $this;
     }
 }

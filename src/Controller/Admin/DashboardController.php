@@ -2,10 +2,14 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Arrival;
+use App\Entity\ArrivalDetails;
 use App\Entity\Category;
 use App\Entity\Customer;
+use App\Entity\Like;
 use App\Entity\Photo;
 use App\Entity\Product;
+use App\Entity\Review;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -60,5 +64,9 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Categories', 'fas fa-list', Category::class);
         yield MenuItem::linkToCrud('Products', 'fas fa-list', Product::class);
         yield MenuItem::linkToCrud('Photos', 'fas fa-list', Photo::class);
+        yield MenuItem::linkToCrud('Likes', 'fas fa-list', Like::class);
+        yield MenuItem::linkToCrud('Reviews', 'fas fa-list', Review::class);
+        yield MenuItem::linkToCrud('Arrivals', 'fas fa-list', Arrival::class);
+        yield MenuItem::linkToCrud('Arrivals details', 'fas fa-list', ArrivalDetails::class);
     }
 }

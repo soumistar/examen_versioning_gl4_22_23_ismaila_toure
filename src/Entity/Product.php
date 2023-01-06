@@ -43,9 +43,20 @@ class Product
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $details = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $active = null;
+
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: Like::class)]
+    private Collection $likes;
+
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: Review::class)]
+    private Collection $reviews;
+
     public function __construct()
     {
         $this->photos = new ArrayCollection();
+        $this->likes = new ArrayCollection();
+        $this->reviews = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -180,6 +191,78 @@ class Product
     public function setDetails(?string $details): self
     {
         $this->details = $details;
+
+        return $this;
+    }
+
+    public function isActive(): ?bool
+    {
+        return $this->active;
+    }
+
+    public function setActive(?bool $active): self
+    {
+        $this->active = $active;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Like>
+     */
+    public function getLikes(): Collection
+    {
+        return $this->likes;
+    }
+
+    public function addLike(Like $like): self
+    {
+        if (!$this->likes->contains($like)) {
+            $this->likes->add($like);
+            $like->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLike(Like $like): self
+    {
+        if ($this->likes->removeElement($like)) {
+            // set the owning side to null (unless already changed)
+            if ($like->getProduct() === $this) {
+                $like->setProduct(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Review>
+     */
+    public function getReviews(): Collection
+    {
+        return $this->reviews;
+    }
+
+    public function addReview(Review $review): self
+    {
+        if (!$this->reviews->contains($review)) {
+            $this->reviews->add($review);
+            $review->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReview(Review $review): self
+    {
+        if ($this->reviews->removeElement($review)) {
+            // set the owning side to null (unless already changed)
+            if ($review->getProduct() === $this) {
+                $review->setProduct(null);
+            }
+        }
 
         return $this;
     }
