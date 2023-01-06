@@ -20,7 +20,7 @@ class Arrival
     private ?\DateTimeImmutable $closed_at = null;
 
     #[ORM\Column(nullable: true)]
-    private ?bool $is_closed = null;
+    private ?bool $closed = null;
 
     public function getId(): ?int
     {
@@ -51,14 +51,14 @@ class Arrival
         return $this;
     }
 
-    public function isIsClosed(): ?bool
+    public function isClosed(): ?bool
     {
-        return $this->is_closed;
+        return $this->closed;
     }
 
-    public function setIsClosed(?bool $is_closed): self
+    public function setClosed(?bool $closed): self
     {
-        $this->is_closed = $is_closed;
+        $this->closed = $closed;
 
         return $this;
     }
